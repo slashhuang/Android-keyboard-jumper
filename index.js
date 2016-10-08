@@ -5,22 +5,23 @@
 * 使用方式
  import K_jumper from 'K_jumper';
  ready(){
-   new K_jumper(this.$els['holderTelNode']);
+   new K_jumper(ele,option);
 }
 *
 */
 
 class K_jumper {
-    constructor(ele){
+    constructor(ele,option={useCapture:false}){
         let self =this;
+        let { useCapture } = option;
         this.$ele = ele;
         if(this.$isAndroid()){
             ele.addEventListener('blur',function(){
                self.blur()
-            });
+            },useCapture);
             ele.addEventListener('focus',function(){
                self.focus()
-            });
+            },useCapture);
             //定义元素在屏幕上的定位 ===>  半个屏幕高度 - 100px
             this.$$scrollDistance = this.$w_height()/2 -100;
         };
